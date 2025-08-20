@@ -1,55 +1,69 @@
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-3 mb-md-0 mb-4">
-                <h2 class="footer-heading"><a href="#" class="logo">Pinjam Ruang</a></h2>
-                <p>Sebuah website yang dapat meminjam ruangan secara mudah dan cepat</p>
-                <!--<a href="#">Baca lebih lajut <span class="fa fa-chevron-right" style="font-size: 11px;"></span></a>-->
-            </div>
-            <div class="col-md-6 col-lg-3 mb-md-0 mb-4">
-                <h2 class="footer-heading">DIKPORA</h2>
-                <ul class="list-unstyled">
-      <li><a href="https://dikpora.jogjaprov.go.id/web/" target="_blank" class="py-1 d-block">Dinas Pendidikan Pemuda dan Olahraga</a></li>
-    </ul>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-md-0 mb-4">
-                <h2 class="footer-heading">Tag</h2>
-                <div class="tagcloud">
-        <a href="#" class="tag-cloud-link">DIKPORA</a>
-        <a href="#" class="tag-cloud-link">DIY</a>
+<footer class="bg-dark text-light pt-5">
+  <div class="container">
+    <div class="row">
+      <!-- Deskripsi -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <h5 class="text-uppercase font-weight-bold mb-3">Pinjam Ruang</h5>
+        <p class="small text-muted">
+          Sebuah website yang memudahkan peminjaman ruangan secara cepat dan efisien.
+        </p>
       </div>
-            </div>
 
-    </form>
-    <ul class="ftco-footer-social p-0">
-      <li class="ftco-animate"><a href="https://x.com/dikpora_diy" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
-      <li class="ftco-animate"><a href="https://x.com/dikpora_diy" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
-      <li class="ftco-animate"><a href="https://www.instagram.com/dinasdikporadiy" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
-    </ul>
-            </div>
-        </div>
-    </div>
-    <div class="w-100 mt-5 border-top py-5">
-        <div class="container">
-            <div class="row">
-      <div class="col-md-6 col-lg-8">
+      <!-- Link Instansi -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <h5 class="text-uppercase font-weight-bold mb-3">DIKPORA</h5>
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://dikpora.jogjaprov.go.id/web/" target="_blank" 
+               class="text-muted d-block mb-2">Dinas Pendidikan Pemuda dan Olahraga DIY</a>
+          </li>
+        </ul>
+      </div>
 
-        <p class="copyright mb-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-      </div>
-      <div class="col-md-6 col-lg-4 text-md-right">
-          <p class="mb-0 list-unstyled">
-              <a class="mr-md-3" href="#">Ketentuan</a>
-              <a class="mr-md-3" href="#">Privasi</a>
-              <a class="mr-md-3" href="#">Kepatuhan</a>
-          </p>
-      </div>
-    </div>
+      <!-- Tag -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <h5 class="text-uppercase font-weight-bold mb-3">Tag</h5>
+        <div class="d-flex flex-wrap">
+          <a href="#" class="badge badge-light text-dark mr-2 mb-2">DIKPORA</a>
+          <a href="#" class="badge badge-light text-dark mr-2 mb-2">DIY</a>
         </div>
+      </div>
+
+      <!-- Sosial Media -->
+      <div class="col-md-6 col-lg-3 mb-4">
+        <h5 class="text-uppercase font-weight-bold mb-3">Ikuti Kami</h5>
+        <div class="d-flex">
+          <a href="https://x.com/dikpora_diy" target="_blank" class="text-light mr-3" data-toggle="tooltip" title="Twitter">
+            <i class="fa fa-twitter fa-lg"></i>
+          </a>
+          <a href="https://www.facebook.com/dinasdikporadiy" target="_blank" class="text-light mr-3" data-toggle="tooltip" title="Facebook">
+            <i class="fa fa-facebook fa-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/dinasdikporadiy" target="_blank" class="text-light" data-toggle="tooltip" title="Instagram">
+            <i class="fa fa-instagram fa-lg"></i>
+          </a>
+        </div>
+      </div>
     </div>
+
+    <hr class="border-secondary">
+
+    <!-- Copyright -->
+    <div class="row align-items-center py-3">
+      <div class="col-md-6 text-center text-md-left mb-2 mb-md-0">
+        <small class="text-muted">
+          &copy; <script>document.write(new Date().getFullYear());</script> Dinas Dikpora DIY. 
+          All Rights Reserved.
+        </small>
+      </div>
+      <div class="col-md-6 text-center text-md-right">
+        <a href="#" class="text-muted small mr-3">Ketentuan</a>
+        <a href="#" class="text-muted small mr-3">Privasi</a>
+        <a href="#" class="text-muted small">Kepatuhan</a>
+      </div>
+    </div>
+  </div>
 </footer>
-
 
 
 <!-- loader -->

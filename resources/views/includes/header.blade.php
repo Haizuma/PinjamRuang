@@ -1,55 +1,58 @@
 <!-- Informasi Kontak -->
-<div class="wrap">
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col d-flex align-items-center">
-                <p class="mb-0 phone">
-                    <span class="mailus">No hp:</span>
-                    <a href="#">+62 1234 5678</a>
-                    atau
-                    <span class="mailus">email:</span>
-                    <a href="mailto:disdikporadiy@gmail.com">disdikporadiy@gmail.com</a>
-                </p>
-            </div>
-            <div class="col d-flex justify-content-end">
-                <div class="social-media">
-                    <p class="mb-0 d-flex">
-                        <a href="https://www.facebook.com/dinasdikporadiy" class="d-flex align-items-center justify-content-center">
-                            <span class="fa fa-facebook"><i class="sr-only">Facebook</i></span>
-                        </a>
-                        <a href="https://x.com/dikpora_diy" target="_blank" class="d-flex align-items-center justify-content-center">
-                            <span class="fa fa-twitter"><i class="sr-only">X</i></span>
-                        </a>
-                        <a href="https://www.instagram.com/dinasdikporadiy" target="_blank" class="d-flex align-items-center justify-content-center">
-                            <span class="fa fa-instagram"><i class="sr-only">Instagram</i></span>
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
+<div class="bg-light border-bottom">
+  <div class="container py-2">
+    <div class="row align-items-center">
+      <!-- Kontak -->
+      <div class="col-md d-flex align-items-center text-muted small">
+        <i class="fa fa-phone mr-2 text-primary"></i>
+        <a href="tel:+6212345678" class="text-muted mr-3">+62 1234 5678</a>
+        <i class="fa fa-envelope mr-2 text-primary"></i>
+        <a href="mailto:disdikporadiy@gmail.com" class="text-muted">disdikporadiy@gmail.com</a>
+      </div>
+
+      <!-- Sosial Media -->
+      <div class="col-md-auto d-flex justify-content-end">
+        <a href="https://www.facebook.com/dinasdikporadiy" target="_blank" class="text-muted mx-2">
+          <i class="fa fa-facebook fa-lg"></i>
+        </a>
+        <a href="https://x.com/dikpora_diy" target="_blank" class="text-muted mx-2">
+          <i class="fa fa-twitter fa-lg"></i>
+        </a>
+        <a href="https://www.instagram.com/dinasdikporadiy" target="_blank" class="text-muted mx-2">
+          <i class="fa fa-instagram fa-lg"></i>
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- Navbar dengan posisi tetap di atas -->
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light fixed-top" id="ftco-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">Pinjam Ruang<span>Disdikpora DIY</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="fa fa-bars"></span> Menu
-        </button>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item @if(\Request::is('/')) active @endif">
-                    <a href="/" class="nav-link">Beranda</a>
-                </li>
-                <li class="nav-item @if(\Request::is('rooms')) active @endif">
-                    <a href="{{ route('rooms') }}" class="nav-link">Daftar Ruangan</a>
-                </li>
-                <li class="nav-item @if(\Request::is('')) active @endif">
-                    <a href="{{ route('admin.login')}}" class="nav-link">Login</a>
-                </li>
-            </ul>
-        </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top" id="ftco-navbar">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand font-weight-bold text-primary" href="index.html">
+      Pinjam Ruang <span class="text-dark">Disdikpora DIY</span>
+    </a>
+
+    <!-- Toggle Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" 
+            aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fa fa-bars"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item @if(\Request::is('/')) active @endif">
+          <a href="/" class="nav-link">Beranda</a>
+        </li>
+        <li class="nav-item @if(\Request::is('rooms')) active @endif">
+          <a href="{{ route('rooms') }}" class="nav-link">Daftar Ruangan</a>
+        </li>
+        <li class="nav-item @if(\Request::is('')) active @endif">
+          <a href="{{ route('admin.login')}}" class="nav-link">Login</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
-<!-- END nav -->
