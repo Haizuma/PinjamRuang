@@ -45,7 +45,7 @@ class BorrowRoom extends Model
         return $this->belongsTo(Administrator::class);
     }
 
-    public function kepalaBidang()
+    public function kepala_bidang()
     {
         return $this->belongsTo(Administrator::class, 'kepala_bidang_id');
     }

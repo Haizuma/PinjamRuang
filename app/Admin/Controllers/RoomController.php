@@ -79,6 +79,65 @@ class RoomController extends Controller
      *
      * @return Grid
      */
+    // protected function grid()
+    // {
+    //     $grid = new Grid(new Room);
+
+    //     $grid->id('ID');
+
+    //     $grid->column('name', 'Nama');
+    //     $grid->column('room_type.name', 'Tipe Ruangan');
+    //     $grid->column('max_people', 'Maks Orang');
+    //     $grid->column('room_status', 'Status Ruangan')->display(function ($value) {
+    //         $val = ['info', 'Kosong'];
+    //         foreach ($this->borrow_rooms as $borrow_room) {
+    //             $lecturer_approval_status = $borrow_room->lecturer_approval_status;
+    //             $admin_approval_status = $borrow_room->admin_approval_status;
+    //             $returned_at = $borrow_room->returned_at ?? null;
+    //             $processed_at = $borrow_room->processed_at ?? null;
+
+    //             if ($lecturer_approval_status == 1) {
+    //                 // $Val = ['success', 'Sudah disetujui Kepala Bidang'];
+    //                 if ($admin_approval_status == 1) {
+    //                     if ($returned_at != null)
+    //                         $val = ['success', 'Peminjaman selesai'];
+    //                     else if ($processed_at != null)
+    //                         $val = ['success', 'Ruangan sedang digunakan'];
+    //                     else
+    //                         $val = ['success', 'Sudah disetujui TU'];
+    //                 } else if ($admin_approval_status == 0)
+    //                     $val = ['info', 'Menunggu persetujuan TU'];
+    //             } else if ($lecturer_approval_status == 0) {
+    //                 $val = ['info', 'Menunggu persetujuan Kepala Bidang'];
+    //             }
+    //         }
+    //         // return 'wkwk';
+    //         return '<span class="label-' . $val[0] . '" style="width: 8px;height: 8px;padding: 0;border-radius: 50%;display: inline-block;"></span>&nbsp;&nbsp;'
+    //             . $val[1];
+    //     });
+
+    //     // Role & Permission
+    //     if (!\Admin::user()->can('create.rooms'))
+    //         $grid->disableCreateButton();
+
+    //     $grid->actions(function ($actions) {
+
+    //         // The roles with this permission will not able to see the view button in actions column.
+    //         if (!\Admin::user()->can('edit.rooms')) {
+    //             $actions->disableEdit();
+    //         }
+    //         // The roles with this permission will not able to see the show button in actions column.
+    //         if (!\Admin::user()->can('list.rooms')) {
+    //             $actions->disableView();
+    //         }
+    //         // The roles with this permission will not able to see the delete button in actions column.
+    //         if (!\Admin::user()->can('delete.rooms')) {
+    //             $actions->disableDelete();
+    //         }
+    //     });
+
+    //     return $grid;
+    // }
     protected function grid()
     {
         $grid = new Grid(new Room);
@@ -88,48 +147,53 @@ class RoomController extends Controller
         $grid->column('name', 'Nama');
         $grid->column('room_type.name', 'Tipe Ruangan');
         $grid->column('max_people', 'Maks Orang');
-        $grid->column('room_status', 'Status Ruangan')->display(function ($value) {
-            $val = ['info', 'Kosong'];
-            foreach ($this->borrow_rooms as $borrow_room) {
-                $lecturer_approval_status = $borrow_room->lecturer_approval_status;
-                $admin_approval_status =    $borrow_room->admin_approval_status;
-                $returned_at =              $borrow_room->returned_at ?? null;
-                $processed_at =             $borrow_room->processed_at ?? null;
 
-                if ($lecturer_approval_status == 1) {
-                    if ($admin_approval_status == 1) {
-                        if ($returned_at != null)
-                            $val = ['success', 'Peminjaman selesai'];
-                        else if ($processed_at != null)
-                            $val = ['success', 'Ruangan sedang digunakan'];
-                        else
-                            $val = ['success', 'Sudah disetujui TU'];
-                    } else if ($admin_approval_status == 0)
-                        $val = ['info', 'Menunggu persetujuan TU'];
-                } else if ($lecturer_approval_status == 0) {
-                    $val = ['info', 'Menunggu persetujuan Kepala Bidang'];
+        // KOLOM YANG DIPERBAIKI
+        $grid->column('room_status', 'Status Ruangan')->display(function () {
+
+            // 1. Ambil HANYA SATU peminjaman yang belum selesai (aktif atau menunggu persetujuan)
+            // Kita menggunakan scope 'isNotFinished' yang sudah Anda buat.
+            $active_borrow = $this->borrow_rooms()->isNotFinished()->first();
+
+            // 2. Set status default menjadi 'Kosong'
+            $val = ['success', 'Kosong'];
+
+            // 3. Jika ada peminjaman yang aktif/menunggu, baru kita cek statusnya
+            if ($active_borrow) {
+                $kepala_bidang_approval = $active_borrow->kepala_bidang_approval_status;
+                $admin_approval = $active_borrow->admin_approval_status;
+                $processed_at = $active_borrow->processed_at;
+
+                // Logika status yang sama seperti sebelumnya, tapi tanpa loop
+                if ($kepala_bidang_approval == 0) { // Belum disetujui Kepala Bidang
+                    $val = ['warning', 'Menunggu persetujuan Kepala Bidang'];
+                } elseif ($kepala_bidang_approval == 1 && $admin_approval == 0) { // Disetujui Kepala Bidang, Menunggu TU
+                    $val = ['info', 'Menunggu persetujuan TU'];
+                } elseif ($kepala_bidang_approval == 1 && $admin_approval == 1) { // Sudah disetujui semua
+                    if ($processed_at != null) {
+                        $val = ['danger', 'Ruangan sedang digunakan'];
+                    } else {
+                        $val = ['primary', 'Sudah disetujui TU'];
+                    }
                 }
             }
-            // return 'wkwk';
-            return '<span class="label-' . $val[0] . '" style="width: 8px;height: 8px;padding: 0;border-radius: 50%;display: inline-block;"></span>&nbsp;&nbsp;'
-                . $val[1];
+
+            // 4. Tampilkan hasilnya
+            return '<span class="label label-' . $val[0] . '">' . $val[1] . '</span>';
         });
 
-        // Role & Permission
+        // ... sisa kode Anda (Role & Permission, actions) tetap sama ...
+
         if (!\Admin::user()->can('create.rooms'))
             $grid->disableCreateButton();
 
         $grid->actions(function ($actions) {
-
-            // The roles with this permission will not able to see the view button in actions column.
             if (!\Admin::user()->can('edit.rooms')) {
                 $actions->disableEdit();
             }
-            // The roles with this permission will not able to see the show button in actions column.
             if (!\Admin::user()->can('list.rooms')) {
                 $actions->disableView();
             }
-            // The roles with this permission will not able to see the delete button in actions column.
             if (!\Admin::user()->can('delete.rooms')) {
                 $actions->disableDelete();
             }
