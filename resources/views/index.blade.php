@@ -2,10 +2,8 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="hero-wrap" 
-    style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}'); 
-           background-size: cover; background-position: center;"
-    data-stellar-background-ratio="0.5">
+<section class="hero-wrap" style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}'); 
+           background-size: cover; background-position: center;" data-stellar-background-ratio="0.5">
 
   <!-- Overlay -->
   <div class="overlay bg-primary" style="opacity: 0.7;"></div>
@@ -58,8 +56,8 @@
 
             @if (session('success'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Pengajuan berhasil ✅. Silakan cek status peminjaman 
-                <a href="{{ route('admin.login') }}" class="font-weight-bold">di sini</a>. 
+                Pengajuan berhasil ✅. Silakan cek status peminjaman
+                <a href="{{ route('admin.login') }}" class="font-weight-bold">di sini</a>.
                 Masuk menggunakan username dan password NIP.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -73,15 +71,16 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <label class="font-weight-semibold">Nama Lengkap</label>
-                  <input name="full_name" value="{{ old('full_name') }}" type="text" class="form-control" placeholder="Masukkan nama lengkap Anda">
+                  <input name="full_name" value="{{ old('full_name') }}" type="text" class="form-control"
+                    placeholder="Masukkan nama lengkap Anda">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label class="font-weight-semibold">Tanggal & Jam Mulai</label>
                   <div class="input-group date" id="borrow_at_picker" data-target-input="nearest">
-                    <input id="borrow_at" name="borrow_at" value="{{ old('borrow_at') }}" 
-                           type="text" class="form-control datetimepicker-input" 
-                           placeholder="Pilih tanggal & jam mulai" data-target="#borrow_at_picker"/>
+                    <input id="borrow_at" name="borrow_at" value="{{ old('borrow_at') }}" type="text"
+                      class="form-control datetimepicker-input" placeholder="Pilih tanggal & jam mulai"
+                      data-target="#borrow_at_picker" />
                     <div class="input-group-append" data-target="#borrow_at_picker" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -91,9 +90,9 @@
                 <div class="form-group col-md-6">
                   <label class="font-weight-semibold">Tanggal & Jam Selesai</label>
                   <div class="input-group date" id="until_at_picker" data-target-input="nearest">
-                    <input id="until_at" name="until_at" value="{{ old('until_at') }}" 
-                           type="text" class="form-control datetimepicker-input" 
-                           placeholder="Pilih tanggal & jam selesai" data-target="#until_at_picker"/>
+                    <input id="until_at" name="until_at" value="{{ old('until_at') }}" type="text"
+                      class="form-control datetimepicker-input" placeholder="Pilih tanggal & jam selesai"
+                      data-target="#until_at_picker" />
                     <div class="input-group-append" data-target="#until_at_picker" data-toggle="datetimepicker">
                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -128,16 +127,20 @@
 
                 <div class="form-group col-md-6">
                   <label class="font-weight-semibold">NIP</label>
-                  <input name="nip" value="{{ old('nip') }}" type="text" class="form-control" placeholder="Masukkan NIP Anda">
+                  <input name="nip" value="{{ old('nip') }}" type="text" class="form-control"
+                    placeholder="Masukkan NIP Anda">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label class="font-weight-semibold">Unit / Bidang</label>
                   <select name="unit_kerja" class="form-control">
                     <option value="" selected disabled>Pilih Unit / Bidang</option>
-                    <option value="bidang-pemuda-olahraga" @if(old('unit_kerja') == 'bidang-pemuda-olahraga') selected @endif>Bidang Pemuda & Olahraga</option>
-                    <option value="bidang-pendidikan-dasar" @if(old('unit_kerja') == 'bidang-pendidikan-dasar') selected @endif>Bidang Pendidikan Dasar</option>
-                    <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>Bidang PAUD & DIKMAS</option>
+                    <option value="bidang-pemuda-olahraga" @if(old('unit_kerja') == 'bidang-pemuda-olahraga') selected
+                    @endif>Bidang Pemuda & Olahraga</option>
+                    <option value="bidang-pendidikan-dasar" @if(old('unit_kerja') == 'bidang-pendidikan-dasar') selected
+                    @endif>Bidang Pendidikan Dasar</option>
+                    <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                      Bidang PAUD & DIKMAS</option>
                   </select>
                 </div>
               </div>
@@ -156,18 +159,18 @@
 </section>
 
 @section('scripts')
-<script>
-  $(function () {
-    $('#borrow_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
-    $('#until_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
-  });
-
-  @if ($errors->isNotEmpty())
-    $(document).ready(function(){
-      if (/Android|iPhone|iPad|Mac|Macintosh|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        document.getElementById("form-pinjam-ruang").scrollIntoView();
-      }
+  <script>
+    $(function () {
+      $('#borrow_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
+      $('#until_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
     });
-  @endif
-</script>
+
+    @if ($errors->isNotEmpty())
+      $(document).ready(function () {
+        if (/Android|iPhone|iPad|Mac|Macintosh|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          document.getElementById("form-pinjam-ruang").scrollIntoView();
+        }
+      });
+    @endif
+  </script>
 @endsection
