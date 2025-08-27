@@ -136,11 +136,19 @@
                   <select name="unit_kerja" class="form-control">
                     <option value="" selected disabled>Pilih Unit / Bidang</option>
                     <option value="bidang-pemuda-olahraga" @if(old('unit_kerja') == 'bidang-pemuda-olahraga') selected
-                    @endif>Bidang Pemuda & Olahraga</option>
+                    @endif>Bidang Pembinaan SMK</option>
                     <option value="bidang-pendidikan-dasar" @if(old('unit_kerja') == 'bidang-pendidikan-dasar') selected
-                    @endif>Bidang Pendidikan Dasar</option>
+                    @endif>Bidang Pembinaan SMA</option>
                     <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
-                      Bidang PAUD & DIKMAS</option>
+                      Bidang PKLK</option>
+                      <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                        Bidang Perencanaan dan PMPPO</option>
+                        <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                          Bidang Subbag Kepegawaian</option>
+                          <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                            Bidang Subbag Keuangan</option>
+                            <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                              Bidang Subbag Umum</option>
                   </select>
                 </div>
               </div>
