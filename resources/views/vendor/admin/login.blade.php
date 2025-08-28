@@ -75,34 +75,62 @@
     font-weight: bold;
   }
 
-  .input-group {
+.left-box a.btn-beranda {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.left-box a.btn-beranda:hover {
+  background: white;
+  color: #2196f3; /* biru */
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
-    position: relative;
-  }
-
-  .input-group .fa {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #aaa;
-  }
-
-  .form-control {
+    border: 1px solid #ddd;
     border-radius: 30px;
-    padding-left: 40px;
-  }
+    padding: 0 15px;
+    background: #f9f9f9;
+}
 
-  .btn-login {
-    width: 100%;
+.input-group .fa {
+    color: #888;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.form-control {
     border: none;
-    border-radius: 30px;
-    padding: 10px;
-    background: linear-gradient(90deg, #00c853, #2196f3);
-    color: #fff;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+    outline: none;
+    box-shadow: none;
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+    background: transparent;
+}
+
+.btn-login {
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  padding: 12px;
+  background: linear-gradient(90deg, #00c853, #2196f3);
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s;
+  height: 45px; /* seragam dengan input */
+}
+
 
   .btn-login:hover {
     opacity: 0.9;
@@ -126,24 +154,6 @@
       flex: unset;
       width: 100%;
     }
-
-    .left-box a.btn-beranda {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.left-box a.btn-beranda:hover {
-  background: white;
-  color: #2196f3; /* biru */
-}
-
   }
 </style>
 
@@ -174,9 +184,9 @@
         <div class="options">
           <label>
             <input type="checkbox" name="remember" value="1" {{ (!old('username') || old('remember')) ? 'checked' : '' }}>
-            Remember
+            Ingat Pengguna
           </label>
-          <a href="#">Forgot password?</a>
+          
         </div>
       </form>
     </div>
