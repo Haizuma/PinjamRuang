@@ -38,6 +38,7 @@ class BorrowRoomApiController extends Controller
             'kepala_bidang' => 'required|exists:admin_users,id',
             'nip' => 'required|numeric',
             'unit_kerja' => 'required|string',
+            'notes' => 'nullable|string|max:500',
         ], [
             'full_name.required' => 'Kolom nama lengkap wajib diisi.',
             'borrow_at.required' => 'Kolom tgl mulai wajib diisi.',
@@ -67,9 +68,9 @@ class BorrowRoomApiController extends Controller
                 'password' => Hash::make($nip)
             ]);
 
-            // Role ID pegawai = 5 (atau sesuaikan dengan DB Anda)
+            // Role ID pegawai = 4 (atau sesuaikan dengan DB Anda)
             \DB::table('admin_role_users')->insert([
-                'role_id' => 5, // pastikan role_id 5 adalah untuk pegawai
+                'role_id' => 4, // pastikan role_id 4 adalah untuk pegawai
                 'user_id' => $admin_user->id,
             ]);
 
@@ -92,8 +93,8 @@ class BorrowRoomApiController extends Controller
 
             // Cek jika waktu baru bertabrakan dengan pinjaman lama
             if (
-                $borrow_at->between($from, $to) || 
-                $until_at->between($from, $to) || 
+                $borrow_at->between($from, $to) ||
+                $until_at->between($from, $to) ||
                 ($borrow_at->lt($from) && $until_at->gt($to))
             ) {
                 $already_booked = true;
@@ -124,6 +125,7 @@ class BorrowRoomApiController extends Controller
             'borrow_at' => $borrow_at,
             'until_at' => $until_at,
             'kepala_bidang_id' => $request->kepala_bidang,
+            'notes' => $request->input('notes'),
         ]);
 
         return redirect(route('home'))->withSuccess(true);

@@ -151,6 +151,11 @@
                               Bidang Subbag Umum</option>
                   </select>
                 </div>
+                <div class="form-group col-md-12">
+                  <label class="font-weight-semibold">Catatan (Keperluan Peminjaman)</label>
+                  <textarea name="notes" class="form-control" rows="3"
+                    placeholder="Contoh: Digunakan untuk rapat koordinasi Bidang Pembinaan SMK">{{ old('notes') }}</textarea>
+                </div>
               </div>
 
               <div class="form-group text-center mt-3">
