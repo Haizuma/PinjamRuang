@@ -14,6 +14,7 @@ use Encore\Admin\Form\Field;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use App\Models\AdminUserDetail;
 
 class BorrowRoomController extends Controller
 {
@@ -66,6 +67,23 @@ class BorrowRoomController extends Controller
 
         $grid->id('ID');
         $grid->column('borrower.name', 'Peminjam');
+        $grid->column('unit_kerja', 'Unit Kerja')->display(function () {
+            // Cari detail user secara manual berdasarkan borrower_id
+            $detail = AdminUserDetail::where('admin_user_id', $this->borrower_id)->first();
+
+            if ($detail) {
+                // Decode kolom JSON 
+                $data = json_decode($detail->data, true);
+
+                // Ambil nilai 'unit_kerja'
+                $unitKerja = $data['unit_kerja'] ?? 'N/A';
+
+                // Rapikan teksnya
+                return ucwords(str_replace('-', ' ', $unitKerja));
+            }
+
+            return 'N/A';
+        });
         $grid->column('room.name', 'Ruangan');
         $grid->column('borrow_at', 'Mulai Pinjam')->display(function ($borrow_at) {
             return Carbon::parse($borrow_at)->format('d M Y H:i');
@@ -128,6 +146,23 @@ class BorrowRoomController extends Controller
 
         $show->id('ID');
         $show->field('borrower.name', 'Peminjam');
+        $show->field('unit_kerja', 'Unit Kerja')->as(function ($borrowerId) {
+            // Cari detail user secara manual berdasarkan borrower_id
+            $detail = AdminUserDetail::where('admin_user_id', $borrowerId)->first();
+
+            if ($detail) {
+                // Decode kolom JSON
+                $data = json_decode($detail->data, true);
+
+                // Ambil nilai 'unit_kerja'
+                $unitKerja = $data['unit_kerja'] ?? 'N/A';
+
+                // Rapikan teksnya
+                return ucwords(str_replace('-', ' ', $unitKerja));
+            }
+
+            return 'N/A';
+        });
         $show->field('room.name', 'Ruangan');
         $show->field('borrow_at', 'Mulai Pinjam');
         $show->field('until_at', 'Selesai Pinjam');
