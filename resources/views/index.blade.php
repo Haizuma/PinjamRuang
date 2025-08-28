@@ -135,19 +135,19 @@
                   <label class="font-weight-semibold">Unit / Bidang</label>
                   <select name="unit_kerja" class="form-control">
                     <option value="" selected disabled>Pilih Unit / Bidang</option>
-                    <option value="bidang-pemuda-olahraga" @if(old('unit_kerja') == 'bidang-pemuda-olahraga') selected
+                    <option value="bidang-pembinaan-smk" @if(old('unit_kerja') == 'bidang-pembinaan-smk') selected
                     @endif>Bidang Pembinaan SMK</option>
-                    <option value="bidang-pendidikan-dasar" @if(old('unit_kerja') == 'bidang-pendidikan-dasar') selected
+                    <option value="bidang-pembinaan-sma" @if(old('unit_kerja') == 'bidang-pembinaan-sma') selected
                     @endif>Bidang Pembinaan SMA</option>
-                    <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                    <option value="bidang-pklk" @if(old('unit_kerja') == 'bidang-pklk') selected @endif>
                       Bidang PKLK</option>
-                      <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                      <option value="bidang-perencanaan-dan-pmppo" @if(old('unit_kerja') == 'bidang-perencanaan-dan-pmppo') selected @endif>
                         Bidang Perencanaan dan PMPPO</option>
-                        <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                        <option value="bidang-subbag-kepegawaian" @if(old('unit_kerja') == 'bidang-subbag-kepegawaian') selected @endif>
                           Bidang Subbag Kepegawaian</option>
-                          <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                          <option value="bidang-subbag-keuangan" @if(old('unit_kerja') == 'bidang-subbag-keuangan') selected @endif>
                             Bidang Subbag Keuangan</option>
-                            <option value="bidang-paud-dikmas" @if(old('unit_kerja') == 'bidang-paud-dikmas') selected @endif>
+                            <option value="bidang-subbag-umum" @if(old('unit_kerja') == 'bidang-subbag-umum') selected @endif>
                               Bidang Subbag Umum</option>
                   </select>
                 </div>
