@@ -24,4 +24,13 @@ class Room extends Model
     {
         return $this->hasMany(BorrowRoom::class);
     }
+    public function isCurrentlyBooked()
+    {
+        return $this->borrow_rooms()
+            ->whereNull('returned_at') // Belum dikembalikan
+            ->where('admin_approval_status', \App\Enums\ApprovalStatus::Disetujui) // Sudah disetujui Admin
+            ->where('borrow_at', '<=', now()) // Waktu mulai sudah lewat
+            ->where('until_at', '>=', now()) // Waktu selesai belum lewat
+            ->exists(); // Cukup cek apakah ada satu saja yang cocok, akan mengembalikan true atau false
+    }
 }

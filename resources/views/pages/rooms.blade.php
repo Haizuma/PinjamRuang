@@ -19,113 +19,170 @@
       </div>
     </section>
 
-    <!-- Room List -->
+  {{-- Form Filter Ruangan dan Hari --}}
+  <section class="ftco-section pb-0">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title text-center text-primary mb-4">Lihat Jadwal Ruangan</h5>
+              <form action="{{ route('rooms') }}" method="GET">
+                <div class="form-row align-items-end">
+                  <div class="form-group col-md-6">
+                    <label for="room_id">Pilih Ruangan</label>
+                    <select name="room_id" class="form-control">
+                      <option value="">-- Semua Ruangan --</option>
+                      @foreach ($data['all_rooms'] as $room)
+                        <option value="{{ $room->id }}" @if(request('room_id') == $room->id) selected @endif>
+                          {{ $room->name }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="selected_date">Pilih Tanggal</label>
+                    <div class="input-group date" id="date_picker" data-target-input="nearest">
+                      <input type="text" name="selected_date" class="form-control datetimepicker-input"
+                        data-target="#date_picker" placeholder="Pilih tanggal" value="{{ request('selected_date') }}">
+                      <div class="input-group-append" data-target="#date_picker" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Lihat</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{-- Pastikan script ini ada di section 'scripts' --}}
+  @section('scripts')
+    <script>
+      $(function () {
+        // ... script datetimepicker Anda yang sudah ada ...
+        $('#borrow_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
+        $('#until_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
+
+        // Script untuk filter tanggal
+        $('#date_picker').datetimepicker({ format: 'DD-MM-YYYY' });
+      });
+    </script>
+  @endsection
+  <!-- Room List -->
   <section class="ftco-section bg-light py-5">
     <div class="container">
       <div class="row justify-content-center">
         @foreach ($data['rooms'] as $room)
-          @php
-            // Variabel untuk menampung semua jadwal booking yang relevan
-            $schedules = [];
-            $isCurrentlyBooked = false;
+                    @php
+          // Variabel untuk menampung semua jadwal booking yang relevan
+          $schedules = [];
+          $isCurrentlyBooked = false;
 
-            // Mengambil semua jadwal yang belum selesai untuk ruangan ini
-            $activeBookings = $room->borrow_rooms()
-              ->whereNull('returned_at') // Belum dikembalikan
-              ->where('kepala_bidang_approval_status', '!=', 2) // Tidak ditolak
-              ->orderBy('borrow_at', 'asc') // Urutkan berdasarkan waktu mulai
-              ->get();
+          // Mengambil semua jadwal yang belum selesai untuk ruangan ini
+          $activeBookings = $room->borrow_rooms()
+            ->whereNull('returned_at') // Belum dikembalikan
+            ->where('kepala_bidang_approval_status', '!=', 2) // Tidak ditolak
+            ->orderBy('borrow_at', 'asc') // Urutkan berdasarkan waktu mulai
+            ->get();
 
-            foreach ($activeBookings as $booking) {
-              // Tambahkan setiap jadwal ke array
-              $schedules[] = $booking;
+          foreach ($activeBookings as $booking) {
+            // Tambahkan setiap jadwal ke array
+            $schedules[] = $booking;
 
-              // Cek apakah ruangan sedang digunakan saat ini
-              if (now()->between($booking->borrow_at, $booking->until_at) && $booking->admin_approval_status == App\Enums\ApprovalStatus::Disetujui) {
-                $isCurrentlyBooked = true;
-              }
+            // Cek apakah ruangan sedang digunakan saat ini
+            if (now()->between($booking->borrow_at, $booking->until_at) && $booking->admin_approval_status == App\Enums\ApprovalStatus::Disetujui) {
+              $isCurrentlyBooked = true;
             }
+          }
 
-            // Tentukan status ruangan
-            $room_status = $isCurrentlyBooked ? 1 : $room->status;
+          // Tentukan status ruangan
+          $room_status = $isCurrentlyBooked ? 1 : $room->status;
 
-          @endphp
+                    @endphp
 
-          <div class="col-md-10 mb-4">
-            <div class="card border-0 shadow-sm">
+                    <div class="col-md-10 mb-4">
+                      <div class="card border-0 shadow-sm">
+                        @php
+                            $schedules = $room->borrow_rooms;
+                            $isCurrentlyBooked = $room->isCurrentlyBooked(); // Asumsi method ini ada di model Room
+                            $room_status = $isCurrentlyBooked ? 1 : $room->status;
+                          // mapping nama ruangan ke file gambar
+                          $roomImages = [
+                            'Sasana Mitra' => 'room-1.jpg',
+                            'Sasana Krida' => 'room-2.jpg',
+                            'Sasana Wiyata' => 'room-4.jpg',
+                            'Ruang Rapat SPAB' => 'room-5.jpg',
+                            'Ruang Rapat Wakadis' => 'room-6.jpg',
+                            'Sasana Cipta' => 'room-7.jpg',
+                          ];
 
-              @php
-    // mapping nama ruangan ke file gambar
-    $roomImages = [
-        'Sasana Mitra'   => 'room-1.jpg',
-        'Sasara Krida'   => 'room-2.jpg',
-        'Sasana Krasa'    => 'room-3.jpg',
-        'Sasana Wiyata'      => 'room-4.jpg',
-        'Ruang Rapat SPAB'=> 'room-5.jpg',
-        'Ruang Rapat Wakadis'=> 'room-6.jpg',
-        'Sasana Cipta'=> 'room-7.jpg',
-    ];
+                          // kalau tidak ada di mapping → pakai default
+                          $imageFile = $roomImages[$room->name] ?? 'default-room.jpg';
+                        @endphp
 
-    // kalau tidak ada di mapping → pakai default
-    $imageFile = $roomImages[$room->name] ?? 'default-room.jpg';
-@endphp
+          <img class="card-img-top"
+               src="{{ asset('vendor/technext/vacation-rental/images/' . $imageFile) }}"
+               alt="Gambar Ruangan {{ $room->name }}" style="height: 200px; object-fit: cover;">
 
-<img class="card-img-top"
-     src="{{ asset('vendor/technext/vacation-rental/images/' . $imageFile) }}"
-     alt="Gambar Ruangan {{ $room->name }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                          <h3 class="card-title text-primary font-weight-bold">{{ $room->name }}</h3>
+                          <p class="text-muted mb-2">{{ $room->room_type->name }}</p>
+                          <ul class="list-unstyled small mb-3">
+                            <li><strong>Maks:</strong> {{ $room->max_people }} Orang</li>
+                            <li><strong>Status:</strong> {{ App\Enums\RoomStatus::getDescription($room_status) }}</li>
+                          </ul>
 
-              <div class="card-body text-center">
-                <h3 class="card-title text-primary font-weight-bold">{{ $room->name }}</h3>
-                <p class="text-muted mb-2">{{ $room->room_type->name }}</p>
-                <ul class="list-unstyled small mb-3">
-                  <li><strong>Maks:</strong> {{ $room->max_people }} Orang</li>
-                  <li><strong>Status:</strong> {{ App\Enums\RoomStatus::getDescription($room_status) }}</li>
-                </ul>
+                          {{-- Tombol untuk menampilkan jadwal --}}
+                          <a class="btn btn-outline-secondary btn-sm px-3" data-toggle="collapse" href="#schedule-{{ $room->id }}"
+                            role="button" aria-expanded="false" aria-controls="schedule-{{ $room->id }}">
+                            <i class="fa fa-calendar-alt mr-1"></i> Lihat Jadwal
+                          </a>
 
-                {{-- Tombol untuk menampilkan jadwal --}}
-                <a class="btn btn-outline-secondary btn-sm px-3" data-toggle="collapse" href="#schedule-{{ $room->id }}"
-                  role="button" aria-expanded="false" aria-controls="schedule-{{ $room->id }}">
-                  <i class="fa fa-calendar-alt mr-1"></i> Lihat Jadwal
-                </a>
+                          <button class="btn btn-primary btn-sm px-4" id="buttonBorrowRoomModal" data-toggle="modal"
+                            data-target="#borrowRoomModal" data-room-id="{{ $room->id }}" data-room-name="{{ $room->name }}">
+                            Pinjam Ruang Ini
+                          </button>
+                        </div>
 
-                <button class="btn btn-primary btn-sm px-4" id="buttonBorrowRoomModal" data-toggle="modal"
-                  data-target="#borrowRoomModal" data-room-id="{{ $room->id }}" data-room-name="{{ $room->name }}">
-                  Pinjam Ruang Ini
-                </button>
-              </div>
-
-              {{-- Dropdown/Collapse yang berisi tabel jadwal --}}
-              <div class="collapse" id="schedule-{{ $room->id }}">
-                <div class="card card-body border-top">
-                  @if (count($schedules) > 0)
-                    <h6 class="text-center mb-3">Jadwal Peminjaman</h6>
-                    <table class="table table-sm table-bordered small">
-                      <thead class="table-primary">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Mulai Pinjam</th>
-                          <th scope="col">Selesai Pinjam</th>
-                          <th scope="col">Catatan</th>
-                        </tr>
-                      </thead>
-                      <tbody class="table-light">
-                        @foreach ($schedules as $index => $schedule)
-                          <tr>
-                            <th scope="row">{{ $index + 1 }}</th>
-                            <td>{{ Carbon\Carbon::parse($schedule->borrow_at)->format('d M Y, H:i') }}</td>
-                            <td>{{ Carbon\Carbon::parse($schedule->until_at)->format('d M Y, H:i') }}</td>
-                            <td>{{ $schedule->notes ?? '-' }}</td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  @else
-                    <p class="text-center text-muted mb-0">Belum ada jadwal peminjaman untuk ruangan ini.</p>
-                  @endif
-                </div>
-              </div>
-            </div>
-          </div>
+                        {{-- Dropdown/Collapse yang berisi tabel jadwal --}}
+                        <div class="collapse" id="schedule-{{ $room->id }}">
+                          <div class="card card-body border-top">
+                            @if (count($schedules) > 0)
+                              <h6 class="text-center mb-3">Jadwal Peminjaman</h6>
+                              <table class="table table-sm table-bordered small">
+                                <thead class="table-primary">
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Mulai Pinjam</th>
+                                    <th scope="col">Selesai Pinjam</th>
+                                    <th scope="col">Catatan</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="table-light">
+                                  @foreach ($schedules as $index => $schedule)
+                                    <tr>
+                                      <th scope="row">{{ $index + 1 }}</th>
+                                      <td>{{ Carbon\Carbon::parse($schedule->borrow_at)->format('d M Y, H:i') }}</td>
+                                      <td>{{ Carbon\Carbon::parse($schedule->until_at)->format('d M Y, H:i') }}</td>
+                                      <td>{{ $schedule->notes ?? '-' }}</td>
+                                    </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+                            @else
+                              <p class="text-center text-muted mb-0">Belum ada jadwal peminjaman untuk ruangan ini.</p>
+                            @endif
+                          </div>
+                        </div>
+                      </div>
+                    </div>
         @endforeach
       </div>
     </div>
