@@ -27,7 +27,7 @@
 </section>
 
 
-<!-- Form Peminjaman -->
+{{-- <!-- Form Peminjaman -->
 <section id="form-pinjam-ruang" class="ftco-section bg-light py-5">
   <div class="container">
     <div class="row justify-content-center">
@@ -63,9 +63,9 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-            @endif
+            @endif --}}
 
-            <!-- Form -->
+            {{-- <!-- Form -->
             <form method="POST" action="{{ route('api.v1.borrow-room-with-pegawai') }}">
               @csrf
               <div class="form-row">
@@ -152,9 +152,9 @@
                   </select>
                 </div>
                 <div class="form-group col-md-12">
-                  <label class="font-weight-semibold">Catatan (Keperluan Peminjaman)</label>
+                  <label class="font-weight-semibold">Nama Kegiatan</label>
                   <textarea name="notes" class="form-control" rows="3"
-                    placeholder="Contoh: Digunakan untuk rapat koordinasi Bidang Pembinaan SMK">{{ old('notes') }}</textarea>
+                    placeholder="Contoh: Digunakan untuk rapat koordinasi Subbag Umum">{{ old('notes') }}</textarea>
                 </div>
               </div>
 
@@ -163,13 +163,13 @@
                   Pinjam Ruang Sekarang
                 </button>
               </div>
-            </form>
-          </div>
+            </form> --}}
+          {{-- </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </div> --}}
+{{-- </section> --}}
 
 @section('scripts')
   <script>

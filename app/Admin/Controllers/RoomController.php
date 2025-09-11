@@ -256,12 +256,13 @@ class RoomController extends Controller
         $form->select('room_type_id', 'Tipe Ruangan')->options(function ($id) {
             return RoomType::all()->pluck('name', 'id');
         });
-        $form->slider('max_people', 'Maksimal Orang')->options([
-            'min' => 1,
-            'max' => 100,
-            'from' => 20,
-            'postfix' => ' orang'
-        ]);
+        $form->text('max_people', 'Maksimal Orang');
+        // $form->slider('max_people', 'Maksimal Orang')->options([
+        //     'min' => 1,
+        //     'max' => 200,
+        //     'from' => 1,
+        //     'postfix' => ' orang'
+        // ]);
         $form->radio('status', 'Status')->options(RoomStatus::asSelectArray())->stacked();
         $form->textarea('notes', 'Catatan');
 
