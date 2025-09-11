@@ -14,7 +14,7 @@
         <h2 class="subheading font-weight-light mb-2">Selamat Datang di</h2>
         <h1 class="mb-4 font-weight-bold">Sistem Peminjaman Ruangan Disdikpora DIY</h1>
         <p class="mt-4">
-          <a href="#form-pinjam-ruang" class="btn btn-warning text-dark font-weight-bold px-4 py-2 mr-2 shadow-sm">
+          <a href="{{ route('rooms')}}" class="btn btn-warning text-dark font-weight-bold px-4 py-2 mr-2 shadow-sm">
             Ajukan Peminjaman
           </a>
           <a href="{{ route('admin.login')}}" class="btn btn-outline-light px-4 py-2 shadow-sm">
