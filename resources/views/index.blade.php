@@ -26,6 +26,19 @@
   </div>
 </section>
 
+<!-- Alur Peminjaman -->
+<section class="ftco-section bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10 text-center">
+        <!-- Gambar alur -->
+        <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}" 
+             alt="Alur Peminjaman Ruang" 
+             class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
 
 {{-- <!-- Form Peminjaman -->
 <section id="form-pinjam-ruang" class="ftco-section bg-light py-5">
