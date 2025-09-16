@@ -20,7 +20,7 @@
     </section>
 
   {{-- Form Filter Ruangan dan Hari --}}
-  <section class="ftco-section pb-0">
+  <section class="ftco-section pb-0 pt-4">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-10">
