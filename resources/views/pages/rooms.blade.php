@@ -10,7 +10,7 @@
             <p class="breadcrumbs mb-2">
               <span class="mr-2">
                 <a href="{{ route('home') }}" class="text-white">Beranda <i class="fa fa-chevron-right"></i></a>
-              </span> 
+              </span>
               <span>Ruangan <i class="fa fa-chevron-right"></i></span>
             </p>
             <h1 class="mb-0 font-weight-bold">Daftar Ruangan</h1>
@@ -26,7 +26,7 @@
         <div class="col-md-10">
           <div class="card shadow-sm border-0">
             <div class="card-body">
-              <h5 class="card-title text-center text-primary mb-4">Lihat Jadwal Ruangan</h5>
+              <h3 class="card-title text-center text-primary mb-4">Lihat Jadwal Ruangan</h3>
               <form action="{{ route('rooms') }}" method="GET">
                 <div class="form-row align-items-end">
                   <div class="form-group col-md-6">
@@ -53,6 +53,20 @@
                   <div class="form-group col-md-2">
                     <button type="submit" class="btn btn-primary btn-block">Lihat</button>
                   </div>
+                    @if(request('room_id') || request('selected_date'))
+                      <div class="row justify-content-center">
+                      <div class="col">
+                      <div class="alert alert-primary d-flex justify-content-between align-items-center">
+                      <span class="p-2">
+                      Menampilkan hasil filter.
+                      </span>
+                      <a href="{{ route('rooms') }}" class="btn btn-sm btn-warning border">
+                      Hapus Filter
+                      </a>
+                      </div>
+                       </div>
+                       </div>
+                    @endif
                 </div>
               </form>
             </div>
@@ -81,50 +95,50 @@
       <div class="row justify-content-center">
         @foreach ($data['rooms'] as $room)
                     @php
-          // Variabel untuk menampung semua jadwal booking yang relevan
-          $schedules = [];
-          $isCurrentlyBooked = false;
+  // Variabel untuk menampung semua jadwal booking yang relevan
+  $schedules = [];
+  $isCurrentlyBooked = false;
 
-          // Mengambil semua jadwal yang belum selesai untuk ruangan ini
-          $activeBookings = $room->borrow_rooms()
-            ->whereNull('returned_at') // Belum dikembalikan
-            ->where('kepala_bidang_approval_status', '!=', 2) // Tidak ditolak
-            ->orderBy('borrow_at', 'asc') // Urutkan berdasarkan waktu mulai
-            ->get();
+  // Mengambil semua jadwal yang belum selesai untuk ruangan ini
+  $activeBookings = $room->borrow_rooms()
+    ->whereNull('returned_at') // Belum dikembalikan
+    ->where('kepala_bidang_approval_status', '!=', 2) // Tidak ditolak
+    ->orderBy('borrow_at', 'asc') // Urutkan berdasarkan waktu mulai
+    ->get();
 
-          foreach ($activeBookings as $booking) {
-            // Tambahkan setiap jadwal ke array
-            $schedules[] = $booking;
+  foreach ($activeBookings as $booking) {
+    // Tambahkan setiap jadwal ke array
+    $schedules[] = $booking;
 
-            // Cek apakah ruangan sedang digunakan saat ini
-            if (now()->between($booking->borrow_at, $booking->until_at) && $booking->admin_approval_status == App\Enums\ApprovalStatus::Disetujui) {
-              $isCurrentlyBooked = true;
-            }
-          }
+    // Cek apakah ruangan sedang digunakan saat ini
+    if (now()->between($booking->borrow_at, $booking->until_at) && $booking->admin_approval_status == App\Enums\ApprovalStatus::Disetujui) {
+      $isCurrentlyBooked = true;
+    }
+  }
 
-          // Tentukan status ruangan
-          $room_status = $isCurrentlyBooked ? 1 : $room->status;
+  // Tentukan status ruangan
+  $room_status = $isCurrentlyBooked ? 1 : $room->status;
 
                     @endphp
 
                     <div class="col-md-10 mb-4">
                       <div class="card border-0 shadow-sm">
                         @php
-                            $schedules = $room->borrow_rooms;
-                            $isCurrentlyBooked = $room->isCurrentlyBooked(); // Asumsi method ini ada di model Room
-                            $room_status = $isCurrentlyBooked ? 1 : $room->status;
-                          // mapping nama ruangan ke file gambar
-                          $roomImages = [
-                            'Sasana Mitra' => 'room-1.jpg',
-                            'Sasana Krida' => 'room-2.jpg',
-                            'Sasana Wiyata' => 'room-4.jpg',
-                            'Ruang Rapat SPAB' => 'room-5.jpg',
-                            'Ruang Rapat Wakadis' => 'room-6.jpg',
-                            'Sasana Cipta' => 'room-7.jpg',
-                          ];
+  $schedules = $room->borrow_rooms;
+  $isCurrentlyBooked = $room->isCurrentlyBooked(); // Asumsi method ini ada di model Room
+  $room_status = $isCurrentlyBooked ? 1 : $room->status;
+  // mapping nama ruangan ke file gambar
+  $roomImages = [
+    'Sasana Mitra' => 'room-1.jpg',
+    'Sasana Krida' => 'room-2.jpg',
+    'Sasana Wiyata' => 'room-4.jpg',
+    'Ruang Rapat SPAB' => 'room-5.jpg',
+    'Ruang Rapat Wakadis' => 'room-6.jpg',
+    'Sasana Cipta' => 'room-7.jpg',
+  ];
 
-                          // kalau tidak ada di mapping → pakai default
-                          $imageFile = $roomImages[$room->name] ?? 'default-room.jpg';
+  // kalau tidak ada di mapping → pakai default
+  $imageFile = $roomImages[$room->name] ?? 'default-room.jpg';
                         @endphp
 
           <img class="card-img-top"

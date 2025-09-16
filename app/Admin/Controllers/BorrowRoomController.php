@@ -88,7 +88,10 @@ class BorrowRoomController extends Controller
         $grid->column('borrow_at', 'Mulai Pinjam')->display(function ($borrow_at) {
             return Carbon::parse($borrow_at)->format('d M Y H:i');
         });
-        $grid->column('until_at', 'Lama Pinjam')->display(function ($title) {
+        $grid->column('until_at', 'Selesai Pinjam')->display(function ($until_at) {
+            return Carbon::parse($until_at)->format('d M Y H:i');
+        });
+        $grid->column('duration', 'Lama Pinjam')->display(function ($title) {
             $borrow_at = Carbon::parse($this->borrow_at);
             $until_at = Carbon::parse($title);
             return $until_at->diffForHumans($borrow_at);
