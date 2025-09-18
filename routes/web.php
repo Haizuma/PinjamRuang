@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\BorrowRoomApiController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BorrowingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/rooms', [HomeController::class, 'rooms'])->name('rooms');
-
+Route::post('/borrow', [BorrowingController::class, 'store'])->name('borrow.store');
 Route::group([
     'prefix' => 'api/v1',
     'as'     => 'api.v1.'

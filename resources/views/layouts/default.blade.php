@@ -37,4 +37,5 @@
         @include('includes.footer')
         @yield('scripts')
     </body>
+    @stack('scripts')
 </html>
