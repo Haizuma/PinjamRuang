@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="hero-wrap" style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}'); 
+<section class="hero-wrap" style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}');
            background-size: cover; background-position: center;" data-stellar-background-ratio="0.5">
 
   <!-- Overlay -->
@@ -32,14 +32,27 @@
     <div class="row justify-content-center">
       <div class="col-md-10 text-center">
         <!-- Gambar alur -->
-        <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}" 
-             alt="Alur Peminjaman Ruang" 
+        <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}"
+             alt="Alur Peminjaman Ruang"
              class="img-fluid rounded shadow">
       </div>
     </div>
   </div>
 </section>
-
+    @if ($errors->any())
+        <div class="container my-4">
+            <div class="alert alert-danger shadow-sm">
+                <h5 class="alert-heading">Terjadi Kesalahan!</h5>
+                <p>Mohon periksa kembali input Anda:</p>
+                <hr>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
 {{-- <!-- Form Peminjaman -->
 <section id="form-pinjam-ruang" class="ftco-section bg-light py-5">
   <div class="container">
