@@ -54,8 +54,7 @@ class BorrowRoom extends Model
     {
         return $this->belongsTo(Administrator::class);
     }
-    
-}
+  
 
 
     /**
@@ -72,4 +71,5 @@ class BorrowRoom extends Model
     {
         return $query->where('kepala_bidang_approval_status', '=', ApprovalStatus::Disetujui());
     }
+
 }
