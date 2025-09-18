@@ -1,44 +1,46 @@
 @extends('layouts.default')
 @section('content')
 
-<!-- Hero Section -->
-<section class="hero-wrap" style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}');
-           background-size: cover; background-position: center;" data-stellar-background-ratio="0.5">
+    <!-- Hero Section -->
+    <section class="hero-wrap"
+        style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}');
+           background-size: cover; background-position: center;"
+        data-stellar-background-ratio="0.5">
 
-  <!-- Overlay -->
-  <div class="overlay bg-primary" style="opacity: 0.7;"></div>
+        <!-- Overlay -->
+        <div class="overlay bg-primary" style="opacity: 0.7;"></div>
 
-  <div class="container">
-    <div class="row slider-text align-items-center justify-content-center text-center" style="min-height: 70vh;">
-      <div class="col-md-9 text-white ftco-animate">
-        <h2 class="subheading font-weight-light mb-2">Selamat Datang di</h2>
-        <h1 class="mb-4 font-weight-bold">Sistem Peminjaman Ruangan Disdikpora DIY</h1>
-        <p class="mt-4">
-          <a href="{{ route('rooms')}}" class="btn btn-warning text-dark font-weight-bold px-4 py-2 mr-2 shadow-sm">
-            Ajukan Peminjaman
-          </a>
-          <a href="{{ route('admin.login')}}" class="btn btn-outline-light px-4 py-2 shadow-sm">
-            Login
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="container">
+            <div class="row slider-text align-items-center justify-content-center text-center" style="min-height: 70vh;">
+                <div class="col-md-9 text-white ftco-animate">
+                    <h2 class="subheading font-weight-light mb-2">Selamat Datang di</h2>
+                    <h1 class="mb-4 font-weight-bold">Sistem Peminjaman Ruangan Disdikpora DIY</h1>
+                    <p class="mt-4">
+                        <a href="{{ route('rooms') }}"
+                            class="btn btn-warning text-dark font-weight-bold px-4 py-2 mr-2 shadow-sm">
+                            Ajukan Peminjaman
+                        </a>
+                        <a href="{{ route('admin.login') }}" class="btn btn-outline-light px-4 py-2 shadow-sm">
+                            Login
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Alur Peminjaman -->
-<section class="ftco-section bg-light py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-10 text-center">
-        <!-- Gambar alur -->
-        <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}"
-             alt="Alur Peminjaman Ruang"
-             class="img-fluid rounded shadow">
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Alur Peminjaman -->
+    <section class="ftco-section bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 text-center">
+                    <!-- Gambar alur -->
+                    <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}"
+                        alt="Alur Peminjaman Ruang" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
     @if ($errors->any())
         <div class="container my-4">
             <div class="alert alert-danger shadow-sm">
@@ -53,7 +55,7 @@
             </div>
         </div>
     @endif
-{{-- <!-- Form Peminjaman -->
+    {{-- <!-- Form Peminjaman -->
 <section id="form-pinjam-ruang" class="ftco-section bg-light py-5">
   <div class="container">
     <div class="row justify-content-center">
@@ -91,7 +93,7 @@
               </div>
             @endif --}}
 
-            {{-- <!-- Form -->
+    {{-- <!-- Form -->
             <form method="POST" action="{{ route('api.v1.borrow-room-with-pegawai') }}">
               @csrf
               <div class="form-row">
@@ -130,7 +132,7 @@
                   <select name="room" class="form-control">
                     <option value="" selected disabled>Pilih ruangan</option>
                     @forelse ($data['rooms'] as $room)
-                      <option value="{{ $room->id }}" @if(old('room') == $room->id) selected @endif>
+                      <option value="{{ $room->id }}" @if (old('room') == $room->id) selected @endif>
                         {{ $room->room_type->name . ' - ' . $room->name }}
                       </option>
                     @empty
@@ -144,7 +146,7 @@
                   <select name="kepala_bidang" class="form-control">
                     <option value="" selected disabled>Pilih Kepala Bidang</option>
                     @forelse ($data['kepala_bidang'] as $key => $name)
-                      <option value="{{ $key }}" @if(old('kepala_bidang') == $key) selected @endif>{{ $name }}</option>
+                      <option value="{{ $key }}" @if (old('kepala_bidang') == $key) selected @endif>{{ $name }}</option>
                     @empty
                       <option value="" disabled>Belum ada Kepala Bidang yang terdaftar</option>
                     @endforelse
@@ -161,19 +163,19 @@
                   <label class="font-weight-semibold">Unit / Bidang</label>
                   <select name="unit_kerja" class="form-control">
                     <option value="" selected disabled>Pilih Unit / Bidang</option>
-                    <option value="bidang-pembinaan-smk" @if(old('unit_kerja') == 'bidang-pembinaan-smk') selected
+                    <option value="bidang-pembinaan-smk" @if (old('unit_kerja') == 'bidang-pembinaan-smk') selected
                     @endif>Bidang Pembinaan SMK</option>
-                    <option value="bidang-pembinaan-sma" @if(old('unit_kerja') == 'bidang-pembinaan-sma') selected
+                    <option value="bidang-pembinaan-sma" @if (old('unit_kerja') == 'bidang-pembinaan-sma') selected
                     @endif>Bidang Pembinaan SMA</option>
-                    <option value="bidang-pklk" @if(old('unit_kerja') == 'bidang-pklk') selected @endif>
+                    <option value="bidang-pklk" @if (old('unit_kerja') == 'bidang-pklk') selected @endif>
                       Bidang PKLK</option>
-                      <option value="bidang-perencanaan-dan-pmppo" @if(old('unit_kerja') == 'bidang-perencanaan-dan-pmppo') selected @endif>
+                      <option value="bidang-perencanaan-dan-pmppo" @if (old('unit_kerja') == 'bidang-perencanaan-dan-pmppo') selected @endif>
                         Bidang Perencanaan dan PMPPO</option>
-                        <option value="bidang-subbag-kepegawaian" @if(old('unit_kerja') == 'bidang-subbag-kepegawaian') selected @endif>
+                        <option value="bidang-subbag-kepegawaian" @if (old('unit_kerja') == 'bidang-subbag-kepegawaian') selected @endif>
                           Bidang Subbag Kepegawaian</option>
-                          <option value="bidang-subbag-keuangan" @if(old('unit_kerja') == 'bidang-subbag-keuangan') selected @endif>
+                          <option value="bidang-subbag-keuangan" @if (old('unit_kerja') == 'bidang-subbag-keuangan') selected @endif>
                             Bidang Subbag Keuangan</option>
-                            <option value="bidang-subbag-umum" @if(old('unit_kerja') == 'bidang-subbag-umum') selected @endif>
+                            <option value="bidang-subbag-umum" @if (old('unit_kerja') == 'bidang-subbag-umum') selected @endif>
                               Bidang Subbag Umum</option>
                   </select>
                 </div>
@@ -190,26 +192,30 @@
                 </button>
               </div>
             </form> --}}
-          {{-- </div>
+    {{-- </div>
         </div>
       </div>
     </div>
   </div> --}}
-{{-- </section> --}}
+    {{-- </section> --}}
 
 @section('scripts')
-  <script>
-    $(function () {
-      $('#borrow_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
-      $('#until_at_picker').datetimepicker({ format: 'DD-MM-YYYY HH:mm' });
-    });
+    <script>
+        $(function() {
+            $('#borrow_at_picker').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm'
+            });
+            $('#until_at_picker').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm'
+            });
+        });
 
-    @if ($errors->isNotEmpty())
-      $(document).ready(function () {
-        if (/Android|iPhone|iPad|Mac|Macintosh|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          document.getElementById("form-pinjam-ruang").scrollIntoView();
-        }
-      });
-    @endif
-  </script>
+        @if ($errors->isNotEmpty())
+            $(document).ready(function() {
+                if (/Android|iPhone|iPad|Mac|Macintosh|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    document.getElementById("form-pinjam-ruang").scrollIntoView();
+                }
+            });
+        @endif
+    </script>
 @endsection

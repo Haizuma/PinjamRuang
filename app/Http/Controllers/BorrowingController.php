@@ -33,6 +33,15 @@ class BorrowingController extends Controller
             'nip'           => 'required|numeric',
             'unit_kerja'    => 'required|string',
             'notes'         => 'nullable|string|max:1000',
+        ], [
+            'full_name.required'     => 'Kolom nama lengkap wajib diisi.',
+            'borrow_at.required'     => 'Kolom tanggal & jam mulai wajib diisi.',
+            'until_at.required'      => 'Kolom tanggal & jam selesai wajib diisi.',
+            'room.required'          => 'Kolom ruangan wajib diisi.',
+            'kepala_bidang.required' => 'Kolom kepala bidang wajib diisi.',
+            'nip.required'           => 'Kolom NIP wajib diisi.',
+            'nip.numeric'            => 'Kolom NIP harus berupa angka.',
+            'unit_kerja.required'    => 'Kolom unit kerja wajib diisi.',
         ]);
 
         // Jika validasi dasar gagal, kembali dengan pesan error
@@ -91,7 +100,7 @@ class BorrowingController extends Controller
             ->where('kepala_bidang_approval_status', '!=', 2) // Abaikan yang ditolak
             ->where(function ($query) use ($borrow_at, $until_at) {
                 $query->where('borrow_at', '<', $until_at)
-                      ->where('until_at', '>', $borrow_at);
+                    ->where('until_at', '>', $borrow_at);
             })
             ->exists();
 
@@ -101,7 +110,7 @@ class BorrowingController extends Controller
 
         // 5. Cek Peminjaman Aktif
         if ($admin_user->borrow_rooms()->isNotFinished()->exists()) {
-             return back()->withErrors(['nip' => 'Anda masih memiliki peminjaman yang belum selesai.'])->withInput();
+            return back()->withErrors(['nip' => 'Anda masih memiliki peminjaman yang belum selesai.'])->withInput();
         }
 
         // 6. Simpan Data Peminjaman
