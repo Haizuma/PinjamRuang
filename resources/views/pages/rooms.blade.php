@@ -140,47 +140,47 @@
                                             </button>
                                         </div>
 
-                                        <div class="collapse @if(request('room_id') == $room->id) show @endif" id="schedule-{{ $room->id }}">
-                                            <div class="card card-body border-top">
-                                                @if ($schedules->isNotEmpty())
-                                                    <h6 class="text-center mb-3">Jadwal Peminjaman {{ request('selected_date') ? 'pada ' . request('selected_date') : '' }}</h6>
-                                                    <table class="table table-sm table-bordered small">
-                                                        <thead class="table-primary">
+                                    <div class="collapse @if(request('room_id') == $room->id) show @endif" id="schedule-{{ $room->id }}">
+                                        <div class="card card-body border-top">
+                                            @if ($schedules->isNotEmpty())
+                                                <h6 class="text-center mb-3">Jadwal Peminjaman {{ request('selected_date') ? 'pada ' . request('selected_date') : '' }}</h6>
+                                                <table class="table table-sm table-bordered small">
+                                                    <thead class="table-primary">
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Mulai Pinjam</th>
+                                                            <th scope="col">Selesai Pinjam</th>
+                                                            <th scope="col">Catatan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-light">
+                                                        @foreach ($schedules->take(5) as $index => $schedule)
                                                             <tr>
-                                                                <th scope="col">#</th>
-                                                                <th scope="col">Mulai Pinjam</th>
-                                                                <th scope="col">Selesai Pinjam</th>
-                                                                <th scope="col">Catatan</th>
+                                                                <th scope="row">{{ $index + 1 }}</th>
+                                                                <td>{{ Carbon\Carbon::parse($schedule->borrow_at)->format('d M Y, H:i') }}</td>
+                                                                <td>{{ Carbon\Carbon::parse($schedule->until_at)->format('d M Y, H:i') }}</td>
+                                                                <td>{{ $schedule->notes ?? '-' }}</td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody class="table-light">
-                                                            @foreach ($schedules->take(5) as $index => $schedule)
-                                                                <tr>
-                                                                    <th scope="row">{{ $index + 1 }}</th>
-                                                                    <td>{{ Carbon\Carbon::parse($schedule->borrow_at)->format('d M Y, H:i') }}</td>
-                                                                    <td>{{ Carbon\Carbon::parse($schedule->until_at)->format('d M Y, H:i') }}</td>
-                                                                    <td>{{ $schedule->notes ?? '-' }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                @else
-                                                    <p class="text-center text-muted mb-0">Tidak ada jadwal peminjaman {{ request('selected_date') ? 'pada tanggal ini' : 'untuk ruangan ini' }}.</p>
-                                                @endif
-                                            </div>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <p class="text-center text-muted mb-0">Tidak ada jadwal peminjaman {{ request('selected_date') ? 'pada tanggal ini' : 'untuk ruangan ini' }}.</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                        @empty
-                            <div class="col-12 text-center">
-                                <div class="alert alert-warning">
-                                    Tidak ada ruangan yang ditemukan sesuai dengan filter Anda.
-                                </div>
                             </div>
-                        @endforelse
-                    </div>
+                    @empty
+                        <div class="col-12 text-center">
+                            <div class="alert alert-warning">
+                                Tidak ada ruangan yang ditemukan sesuai dengan filter Anda.
+                            </div>
+                        </div>
+                    @endforelse
                 </div>
-            </section>
+            </div>
+        </section>
 
         <div class="modal fade" id="borrowRoomModal" tabindex="-1" role="dialog" aria-labelledby="borrowRoomModalLabel"
             aria-hidden="true">
