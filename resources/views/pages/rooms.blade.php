@@ -128,6 +128,7 @@
                                                     <thead class="table-primary">
                                                         <tr>
                                                             <th scope="col">#</th>
+                                                            <th scope="col">Nama</th>
                                                             <th scope="col">Mulai Pinjam</th>
                                                             <th scope="col">Selesai Pinjam</th>
                                                             <th scope="col">Catatan</th>
@@ -137,6 +138,7 @@
                                                         @foreach ($schedules->take(5) as $index => $schedule)
                                                             <tr>
                                                                 <th scope="row">{{ $index + 1 }}</th>
+                                                                <td>{{ $schedule->borrower->name ?? '-' }}</td>
                                                                 <td>{{ Carbon\Carbon::parse($schedule->borrow_at)->format('d M Y, H:i') }}</td>
                                                                 <td>{{ Carbon\Carbon::parse($schedule->until_at)->format('d M Y, H:i') }}</td>
                                                                 <td>{{ $schedule->notes ?? '-' }}</td>

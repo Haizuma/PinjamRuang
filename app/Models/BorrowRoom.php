@@ -54,6 +54,9 @@ class BorrowRoom extends Model
     {
         return $this->belongsTo(Administrator::class);
     }
+    
+}
+
 
     /**
      * Scopes
