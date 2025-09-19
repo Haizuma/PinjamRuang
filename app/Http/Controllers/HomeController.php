@@ -39,7 +39,7 @@ class HomeController extends Controller
         if ($request->filled('selected_date')) {
             try {
                 // Konversi format tanggal dari DD-MM-YYYY ke YYYY-MM-DD
-                $selectedDate = Carbon::createFromFormat('d-m-Y', $request->selected_date)->toDateString();
+                $selectedDate = Carbon::parse($request->selected_date)->toDateString();
             } catch (\Exception $e) {
                 // Abaikan jika format salah
                 $selectedDate = null;

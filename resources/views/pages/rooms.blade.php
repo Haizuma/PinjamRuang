@@ -320,7 +320,7 @@
         $(function() {
             // Inisialisasi untuk filter tanggal di luar modal
             $('#date_picker').datetimepicker({
-                format: 'DD-MM-YYYY'
+                format: 'L'
             });
 
             // Inisialisasi untuk form DI DALAM MODAL
