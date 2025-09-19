@@ -122,6 +122,8 @@ class BorrowingController extends Controller
             'until_at'         => $until_at,
             'kepala_bidang_id' => $request->kepala_bidang,
             'notes'            => $request->input('notes'),
+            'kepala_bidang_approval_status' => \App\Enums\ApprovalStatus::Disetujui(),
+            'admin_approval_status' => \App\Enums\ApprovalStatus::Disetujui(),
         ]);
 
         // 7. Kembali ke Halaman Daftar Ruangan dengan Pesan Sukses
