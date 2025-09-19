@@ -33,7 +33,7 @@
         </div>
     @endif
     @if (session('success'))
-        <div class="container">
+        <div class="container my-4">
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
@@ -318,46 +318,48 @@
 @push('scripts')
     <script>
         $(function() {
-            // Script untuk filter tanggal
+            // Inisialisasi untuk filter tanggal di luar modal
             $('#date_picker').datetimepicker({
                 format: 'DD-MM-YYYY'
             });
 
-            // Datepicker Modal
+            // Inisialisasi untuk form DI DALAM MODAL
             var borrowAtPicker = $('#borrow_at_picker_modal');
             var untilAtPicker = $('#until_at_picker_modal');
 
             borrowAtPicker.datetimepicker({
-                format: 'DD-MM-YYYY HH:mm'
+                format: 'DD-MM-YYYY HH:mm' // Format yang benar dengan waktu
             });
+
             untilAtPicker.datetimepicker({
-                format: 'DD-MM-YYYY HH:mm',
+                format: 'DD-MM-YYYY HH:mm', // Format yang benar dengan waktu
                 useCurrent: false
             });
 
+            // Menghubungkan date picker mulai dan selesai
             borrowAtPicker.on("change.datetimepicker", function(e) {
                 untilAtPicker.datetimepicker('minDate', e.date);
             });
+            untilAtPicker.on("change.datetimepicker", function(e) {
+                borrowAtPicker.datetimepicker('maxDate', e.date);
+            });
 
-            // PERBAIKAN: Menggunakan CLASS ('.') bukan ID ('#')
+            // Event listener untuk tombol 'Pinjam Ruang Ini'
             $(document).on('click', '.buttonBorrowRoomModal', function() {
                 var roomName = $(this).data('room-name');
                 var roomId = $(this).data('room-id');
-
                 var modal = $('#borrowRoomModal');
 
-                console.log("Tombol diklik. Room ID:", roomId, "Room Name:", roomName); // Untuk debugging
-
+                // Mengisi data ruangan ke dalam form modal
                 modal.find('input[name="room"]').val(roomId);
                 modal.find('#borrowRoomModalLabel').text('Pinjam Ruang - ' + roomName);
 
-                // modal.find('form')[0].reset();
+                // Mengosongkan field yang diisi pengguna secara manual
                 modal.find('input[name="full_name"]').val('');
                 modal.find('input[name="borrow_at"]').val('');
                 modal.find('input[name="until_at"]').val('');
-                modal.find('select[name="kepala_bidang"]').prop('selectedIndex', 0); // Reset dropdown
                 modal.find('input[name="nip"]').val('');
-                modal.find('select[name="unit_kerja"]').prop('selectedIndex', 0); // Reset dropdown
+                modal.find('select[name="unit_kerja"]').prop('selectedIndex', 0);
                 modal.find('textarea[name="notes"]').val('');
             });
         });
