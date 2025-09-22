@@ -7,6 +7,7 @@ use App\Admin\Controllers\UserController;
 use App\Admin\Controllers\RoomTypeController;
 use App\Admin\Controllers\RoomController;
 use App\Admin\Controllers\BorrowRoomController;
+use App\Admin\Controllers\AuthController;
 
 Admin::routes();
 
@@ -23,6 +24,8 @@ Route::group([
     $router->resource('room-types', RoomTypeController::class);
     $router->resource('rooms', RoomController::class);
     $router->resource('borrow-rooms', BorrowRoomController::class);
+    $router->get('auth/setting', [AuthController::class, 'getSetting'])->name('setting');
+    $router->put('auth/setting', [AuthController::class, 'putSetting']);
 
     $router->group(['prefix' => 'api'], function (Router $router) {
         // AdministratorApiController

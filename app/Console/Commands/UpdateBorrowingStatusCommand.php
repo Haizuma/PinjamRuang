@@ -31,9 +31,12 @@ class UpdateBorrowingStatusCommand extends Command
 
         // 1. Cari semua peminjaman yang sudah disetujui, belum selesai,
         //    dan waktu selesainya sudah lewat.
-        $completedBookings = BorrowRoom::where('admin_approval_status', \App\Enums\ApprovalStatus::Disetujui())
-            ->whereNull('returned_at') // Cek yang belum selesai
-            ->where('until_at', '<', Carbon::now()) // Cek yang waktunya sudah lewat
+        // Ambil nilai 'Disetujui' dari Enum terlebih dahulu
+        $approvedStatus = \App\Enums\ApprovalStatus::Disetujui();
+
+        $completedBookings = BorrowRoom::where('admin_approval_status', $approvedStatus)
+            ->whereNull('returned_at')
+            ->where('until_at', '<', Carbon::now())
             ->get();
 
         if ($completedBookings->isEmpty()) {
