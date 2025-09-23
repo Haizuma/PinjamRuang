@@ -4,7 +4,7 @@
     <!-- Hero Section -->
     <section class="hero-wrap"
         style="background-image: url('{{ asset('vendor/technext/vacation-rental/images/bg_1.jpg') }}');
-           background-size: cover; background-position: center;"
+           background-size: cover; background-position: center; padding-top: 100px;"
         data-stellar-background-ratio="0.5">
 
         <!-- Overlay -->
@@ -16,12 +16,21 @@
                     <h2 class="subheading font-weight-light mb-2">Selamat Datang di</h2>
                     <h1 class="mb-4 font-weight-bold">Sistem Peminjaman Ruangan Disdikpora DIY</h1>
                     <p class="mt-4">
-                        <a href="{{ route('rooms') }}"
-                            class="btn btn-warning text-dark font-weight-bold px-4 py-2 mr-2 shadow-sm">
-                            Ajukan Peminjaman
-                        </a>
-                        <a href="{{ route('admin.login') }}" class="btn btn-outline-light px-4 py-2 shadow-sm">
-                            Login
+                        {{-- Tombol Baris Pertama --}}
+                        <span>
+                            <a href="{{ route('rooms') }}"
+                                class="btn btn-warning text-dark font-weight-bold px-5 py-3 shadow">
+                                <i class="fa fa-calendar-plus-o mr-2"></i> Ajukan Peminjaman
+                            </a>
+                            <a href="{{ route('admin.login') }}" class="btn btn-outline-light px-5 py-3 shadow">
+                                <i class="fa fa-sign-in mr-2"></i> Login
+                            </a>
+                        </span>
+
+                        {{-- Tombol Baris Kedua --}}
+                        <br>
+                        <a href="#alur-peminjaman" class="btn btn-link text-white mt-4">
+                            Lihat Alur Peminjaman <i class="fa fa-arrow-down ml-2"></i>
                         </a>
                     </p>
                 </div>
@@ -36,7 +45,7 @@
                 <div class="col-md-10 text-center">
                     <!-- Gambar alur -->
                     <img src="{{ asset('vendor/technext/vacation-rental/images/alurpeminjaman.jpg') }}"
-                        alt="Alur Peminjaman Ruang" class="img-fluid rounded shadow">
+                        alt="Alur Peminjaman Ruang" class="img-fluid rounded shadow" id="alur-peminjaman">
                 </div>
             </div>
         </div>

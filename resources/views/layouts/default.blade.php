@@ -15,6 +15,10 @@
         .modal {
             z-index: 1050 !important;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
