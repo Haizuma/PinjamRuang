@@ -163,7 +163,7 @@
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">Mulai Pinjam</th>
                                                     <th scope="col">Selesai Pinjam</th>
-                                                    <th scope="col">Catatan</th>
+                                                    <th scope="col">Kegiatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-light">
@@ -218,14 +218,14 @@
                         <div class="row">
                             <!-- Nama Lengkap -->
                             <div class="col-md-12 mb-3">
-                                <label class="small font-weight-bold">Nama Lengkap</label>
+                                <label class="font-weight-bold">Nama Lengkap</label>
                                 <input name="full_name" value="{{ old('full_name') }}" type="text"
                                     class="form-control" placeholder="Masukkan nama lengkap Anda">
                             </div>
 
                             <!-- Tanggal & Jam Mulai -->
                             <div class="col-md-6 mb-3">
-                                <label class="small font-weight-bold">Tanggal & Jam Mulai</label>
+                                <label class="font-weight-bold">Tanggal & Jam Mulai</label>
                                 <div class="input-group date" id="borrow_at_picker_modal" data-target-input="nearest">
                                     <input name="borrow_at" value="{{ old('borrow_at') }}" type="text"
                                         class="form-control datetimepicker-input" placeholder="Pilih tanggal & jam mulai"
@@ -239,7 +239,7 @@
 
                             <!-- Tanggal & Jam Selesai -->
                             <div class="col-md-6 mb-3">
-                                <label class="small font-weight-bold">Tanggal & Jam Selesai</label>
+                                <label class="font-weight-bold">Tanggal & Jam Selesai</label>
                                 <div class="input-group date" id="until_at_picker_modal" data-target-input="nearest">
                                     <input name="until_at" value="{{ old('until_at') }}" type="text"
                                         class="form-control datetimepicker-input"
@@ -268,14 +268,14 @@
 
                             <!-- NIP -->
                             <div class="col-md-6 mb-3">
-                                <label class="small font-weight-bold">NIP</label>
+                                <label class="font-weight-bold">NIP</label>
                                 <input name="nip" value="{{ old('nip') }}" type="text" class="form-control"
                                     placeholder="Masukkan NIP Anda">
                             </div>
 
                             <!-- Unit / Bidang -->
                             <div class="col-md-12 mb-3">
-                                <label class="small font-weight-bold">Unit / Bidang</label>
+                                <label class="font-weight-bold">Unit / Bidang</label>
                                 <select name="unit_kerja" class="form-control">
                                     <option value="" selected disabled>Pilih Unit / Bidang</option>
                                     <option value="bidang-pembinaan-smk" @if (old('unit_kerja') == 'bidang-pembinaan-smk') selected @endif>
@@ -298,7 +298,7 @@
                             </div>
                             <!-- Catatan -->
                             <div class="form-group col-md-12">
-                                <label class="font-weight-semibold">Catatan (Keperluan Peminjaman)</label>
+                                <label class="font-weight-bold">Kegiatan (Keperluan Peminjaman)</label>
                                 <textarea name="notes" class="form-control" rows="3"
                                     placeholder="Contoh: Digunakan untuk rapat koordinasi Bidang Pembinaan SMK">{{ old('notes') }}</textarea>
                             </div>

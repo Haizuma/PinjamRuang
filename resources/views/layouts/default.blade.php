@@ -19,6 +19,11 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .input-group.date .input-group-append {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 
