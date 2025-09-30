@@ -208,7 +208,7 @@
   </div> --}}
     {{-- </section> --}}
 
-@section('scripts')
+{{-- @section('scripts')
     <script>
         $(function() {
             $('#borrow_at_picker').datetimepicker({
@@ -227,4 +227,32 @@
             });
         @endif
     </script>
-@endsection
+@endsection --}}
+@push('scripts')
+<script>
+    $(document).ready(function(){
+      // Saat sebuah link dengan awalan '#' diklik
+      $("a[href^='#']").on('click', function(event) {
+
+        // Pastikan this.hash punya nilai sebelum menimpa perilaku default
+        if (this.hash !== "") {
+          // Mencegah perilaku klik anchor default (lompatan instan)
+          event.preventDefault();
+
+          // Simpan nilai hash
+          var hash = this.hash;
+
+          // Gunakan metode animate() jQuery untuk menambahkan scroll yang halus
+          // 800 adalah durasi animasi dalam milidetik (bisa diubah)
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top -80
+          }, 300, function(){
+
+            // Tambahkan hash (#) ke URL setelah selesai scroll
+            window.location.hash = hash;
+          });
+        }
+      });
+    });
+</script>
+@endpush
