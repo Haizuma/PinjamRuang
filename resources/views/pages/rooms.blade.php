@@ -66,7 +66,7 @@
                                         <div class="input-group date" id="date_picker" data-target-input="nearest">
                                             <input type="text" name="selected_date"
                                                 class="form-control datetimepicker-input" data-target="#date_picker"
-                                                placeholder="Pilih tanggal" value="{{ request('selected_date') }}">
+                                                value="{{ request('selected_date') }}" />
                                             <div class="input-group-append" data-target="#date_picker"
                                                 data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -320,12 +320,13 @@
         $(function() {
             // Inisialisasi untuk filter tanggal di luar modal
             $('#date_picker').datetimepicker({
-                format: 'L'
+                format: 'L',
             });
 
             // Inisialisasi untuk form DI DALAM MODAL
             var borrowAtPicker = $('#borrow_at_picker_modal');
             var untilAtPicker = $('#until_at_picker_modal');
+            var modal = $('#borrowRoomModal');
 
             borrowAtPicker.datetimepicker({
                 format: 'DD-MM-YYYY HH:mm' // Format yang benar dengan waktu

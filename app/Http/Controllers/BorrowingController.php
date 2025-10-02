@@ -52,8 +52,10 @@ class BorrowingController extends Controller
 
         // 2. Validasi dan Konversi Format Tanggal
         try {
-            $borrow_at = Carbon::createFromFormat('m/d/Y g:i A', $request->borrow_at);
-            $until_at = Carbon::createFromFormat('m/d/Y g:i A', $request->until_at);
+            // $borrow_at = Carbon::createFromFormat('m/d/Y g:i A', $request->borrow_at);
+            // $until_at = Carbon::createFromFormat('m/d/Y g:i A', $request->until_at);
+             $borrow_at = Carbon::createFromFormat('d-m-Y H:i', $request->borrow_at);
+            $until_at = Carbon::createFromFormat('d-m-Y H:i', $request->until_at);
         } catch (\Exception $e) {
             return back()->withErrors(['tanggal' => 'Format tanggal atau waktu tidak valid. Gunakan format DD-MM-YYYY HH:mm.'])->withInput();
         }
