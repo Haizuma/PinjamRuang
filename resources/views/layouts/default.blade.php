@@ -42,7 +42,7 @@
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/popper.min.js') }}"></script>
-    <script src="{{ asset('vendor/technext/vacation-rental/js/bootstrap.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/technext/vacation-rental/js/bootstrap.min.js') }}"></script> --}}
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.stellar.min.js') }}"></script>
