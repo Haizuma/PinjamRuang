@@ -112,9 +112,9 @@ class BorrowingController extends Controller
         }
 
         // 5. Cek Peminjaman Aktif
-        if ($admin_user->borrow_rooms()->isNotFinished()->exists()) {
-            return back()->withErrors(['nip' => 'Anda masih memiliki peminjaman yang belum selesai.'])->withInput();
-        }
+        // if ($admin_user->borrow_rooms()->isNotFinished()->exists()) {
+        //     return back()->withErrors(['nip' => 'Anda masih memiliki peminjaman yang belum selesai.'])->withInput();
+        // }
 
         // 6. Simpan Data Peminjaman
         BorrowRoom::create([
