@@ -302,7 +302,7 @@
                             <div class="form-group col-md-12">
                                 <label class="font-weight-bold">Kegiatan (Keperluan Peminjaman)</label>
                                 <textarea name="notes" class="form-control" rows="3"
-                                    placeholder="Contoh: Digunakan untuk rapat koordinasi Bidang Pembinaan SMK">{{ old('notes') }}</textarea>
+                                    placeholder="Contoh: Digunakan untuk rapat koordinasi Bidang Pembinaan SMK (80 orang)">{{ old('notes') }}</textarea>
                             </div>
                         </div>
                     </div>
