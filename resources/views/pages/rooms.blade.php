@@ -18,32 +18,34 @@
             </div>
         </div>
     </section>
-    @if ($errors->any())
-        <div class="container my-4">
-            <div class="alert alert-danger shadow-sm">
-                <h5 class="alert-heading">Terjadi Kesalahan!</h5>
-                <p>Mohon periksa kembali input Anda:</p>
-                <hr>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="container my-4">
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
+
+
     {{-- Form Filter Ruangan dan Hari --}}
     <section class="ftco-section pb-0 pt-4">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10">
+                    @if ($errors->any())
+                        <div class="container my-4">
+                            <div class="alert alert-danger shadow-sm">
+                                <h5 class="alert-heading">Terjadi Kesalahan!</h5>
+                                <p>Mohon periksa kembali input Anda:</p>
+                                <hr>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="container my-4">
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    @endif
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
                             <h3 class="card-title text-center text-primary mb-4">Lihat Jadwal Ruangan</h3>
