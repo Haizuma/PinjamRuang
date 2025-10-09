@@ -177,6 +177,7 @@ return [
 
         // User tables and model.
         'users_table' => 'admin_users',
+        'user_model' => App\Models\Administrator::class,
         'users_model' => App\Models\Administrator::class,
 
         // Role table and model.
@@ -191,8 +192,11 @@ return [
         'menu_table' => 'admin_menu',
         'menu_model' => Encore\Admin\Auth\Database\Menu::class,
 
-        // Pivot table for table above.
+        // Operation log table and model.
         'operation_log_table' => 'admin_operation_log',
+        'operation_log_model' => Encore\Admin\Auth\Database\OperationLog::class,
+
+        // Pivot tables for relations.
         'user_permissions_table' => 'admin_user_permissions',
         'role_users_table' => 'admin_role_users',
         'role_permissions_table' => 'admin_role_permissions',
