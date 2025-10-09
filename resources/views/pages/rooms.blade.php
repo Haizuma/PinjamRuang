@@ -119,7 +119,7 @@
                             'Sasana Wiyata' => 'room-4.jpg',
                             'Ruang Rapat SPAB' => 'room-5.jpg',
                             'Ruang Rapat Wakadis' => 'room-6.jpg',
-                            'Sasana Cipta' => 'room-7.jpg',
+                            'Sasana Cipta' => 'room-7.JPG',
                         ];
                         $imageFile = $roomImages[$room->name] ?? 'default-room.jpg';
                     @endphp
