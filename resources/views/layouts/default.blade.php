@@ -8,7 +8,7 @@
     {{-- CSS untuk iCheck --}}
     <link rel="stylesheet" href="{{ admin_asset('vendor/laravel-admin/AdminLTE/plugins/iCheck/square/blue.css') }}">
 
-    {{-- CSS untuk Tempus Dominus (ganti dari datetimepicker lama) --}}
+    {{-- CSS untuk Tempus Dominus --}}
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
 
@@ -42,7 +42,7 @@
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/popper.min.js') }}"></script>
-    {{-- <script src="{{ asset('vendor/technext/vacation-rental/js/bootstrap.min.js') }}"></script> --}}
+    <script src="{{ asset('vendor/technext/vacation-rental/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('vendor/technext/vacation-rental/js/jquery.stellar.min.js') }}"></script>
